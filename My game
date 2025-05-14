@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number!</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .game { margin-top: 50px; }
+        .message { font-size: 1.5em; margin: 20px; }
+        .guess { padding: 10px; font-size: 1em; }
+        .btn { padding: 10px 20px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="game">
+        <h1>Guess the Number (1-100)!</h1>
+        <p class="message">Enter your guess below:</p>
+        <input type="number" class="guess" min="1" max="100">
+        <button class="btn" onclick="checkGuess()">Submit</button>
+        <p id="hint"></p>
+        <p id="attempts">Attempts: 0</p>
+    </div>
+
+    <script>
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.querySelector('.guess').value);
+            attempts++;
+            document.getElementById('attempts').textContent = `Attempts: ${attempts}`;
+
+            if (guess === secretNumber) {
+                document.getElementById('hint').textContent = "🎉 Correct! You win!";
+                document.getElementById('hint').style.color = "green";
+                // Optional: Add confetti effect here!
+            } else if (guess < secretNumber) {
+                document.getElementById('hint').textContent = "⬆️ Too low! Try again.";
+                document.getElementById('hint').style.color = "red";
+            } else {
+                document.getElementById('hint').textContent = "⬇️ Too high! Try again.";
+                document.getElementById('hint').style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
